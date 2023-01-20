@@ -18,21 +18,21 @@ Fix Apache Permissions
 ---------------------------------------------
  setsebool -P httpd_can_network_connect on
 
-First re-establish the SELinux context
+1. First re-establish the SELinux context
  restorecon -Rv /var/www/html
 
-Change the owner of the webroot
+2. Change the owner of the webroot
  chown -R apache:apache /var/www/html
 
-Change the basic permissions
+3. Change the basic permissions
  chmod -R g+w /var/www/html
  chmod g+s /var/www/html
 
-Establish the SELinux permissions
+4. Establish the SELinux permissions
 Make all files read only
  chcon -R -t httpd_sys_content_t /var/www/html/
 
-Only allow write on uploads dir
+5. Only allow write on uploads dir
  chcon -R -t httpd_sys_rw_content_t /var/www/html/phonebook
 
 
