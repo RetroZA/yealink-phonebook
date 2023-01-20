@@ -14,6 +14,29 @@ Installation
 2. Unpack archive file under your web directory
 3. Modify .htaccess to allow access to your phone book manager - as described in a .htaccess password protection
 
+Fix Apache Permissions
+---------------------------------------------
+# setsebool -P httpd_can_network_connect on
+
+First re-establish the SELinux context
+# restorecon -Rv /var/www/html
+
+Change the owner of the webroot
+# chown -R apache:apache /var/www/html
+
+Change the basic permissions
+# chmod -R g+w /var/www/html
+# chmod g+s /var/www/html
+
+Establish the SELinux permissions
+Make all files read only
+# chcon -R -t httpd_sys_content_t /var/www/html/
+
+Only allow write on uploads dir
+# chcon -R -t httpd_sys_rw_content_t /var/www/html/phonebook
+
+
+
 ### Using Composer (for development)
 
 Under your host directory clone this Git repository.
