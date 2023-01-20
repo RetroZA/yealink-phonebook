@@ -16,24 +16,24 @@ Installation
 
 Fix Apache Permissions
 ---------------------------------------------
-# setsebool -P httpd_can_network_connect on
+ setsebool -P httpd_can_network_connect on
 
 First re-establish the SELinux context
-# restorecon -Rv /var/www/html
+ restorecon -Rv /var/www/html
 
 Change the owner of the webroot
-# chown -R apache:apache /var/www/html
+ chown -R apache:apache /var/www/html
 
 Change the basic permissions
-# chmod -R g+w /var/www/html
-# chmod g+s /var/www/html
+ chmod -R g+w /var/www/html
+ chmod g+s /var/www/html
 
 Establish the SELinux permissions
 Make all files read only
-# chcon -R -t httpd_sys_content_t /var/www/html/
+ chcon -R -t httpd_sys_content_t /var/www/html/
 
 Only allow write on uploads dir
-# chcon -R -t httpd_sys_rw_content_t /var/www/html/phonebook
+ chcon -R -t httpd_sys_rw_content_t /var/www/html/phonebook
 
 
 
